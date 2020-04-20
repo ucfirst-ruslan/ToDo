@@ -36,8 +36,18 @@ ul.addEventListener('click', (event) => {
 
 //Add item
 let btn = document.querySelector('.btn');
-btn.addEventListener('click',  () => {
+btn.addEventListener('click', () => {
+    addItem();
+});
 
+let input = document.querySelector('input');
+input.addEventListener('keypress', (keyPressed) => {
+    if(keyPressed.key === 'Enter') {
+        addItem();
+    }
+});
+
+function addItem() {
     let input = document.querySelector('input');
     if (input.value) {
         let curTime = new Date().getTime();
@@ -50,7 +60,9 @@ btn.addEventListener('click',  () => {
 
         input.value = '';
     }
-});
+}
+
+
 
 //Create item in to-do list
 function createItem(data) {
