@@ -59,7 +59,7 @@ ul {
       animation: delete 1s linear infinite; }
 
 @keyframes delete {
-  10% {
+  50% {
     content: "X";
     color: white; } }
 .add-todo {
