@@ -37,16 +37,19 @@ ul.addEventListener('click', (event) => {
 //Add item
 let btn = document.querySelector('.btn');
 btn.addEventListener('click',  () => {
+
     let input = document.querySelector('input');
-    let curTime = new Date().getTime();
-    let data = {'id': curTime, 'todo': input.value};
+    if (input.value) {
+        let curTime = new Date().getTime();
+        let data = {'id': curTime, 'todo': input.value};
 
-    dataTODO.push(data);
+        dataTODO.push(data);
 
-    addStorage(dataTODO);
-    createItem([data]);
+        addStorage(dataTODO);
+        createItem([data]);
 
-    input.value = '';
+        input.value = '';
+    }
 });
 
 //Create item in to-do list
