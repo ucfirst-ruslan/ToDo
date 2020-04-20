@@ -4,7 +4,7 @@ let dataTODO = [];
 //Primary load page
 function loadPage() {
     dataTODO = JSON.parse(localStorage.getItem(localKey));
-    console.log(dataTODO);
+
     if(!dataTODO || dataTODO.length === 0) {
         dataTODO = [{
             'id': 1,
