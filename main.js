@@ -5,7 +5,7 @@ let dataTODO = [];
 function loadPage() {
     dataTODO = JSON.parse(localStorage.getItem(localKey));
 
-    if(!dataTODO || dataTODO.length === 0) {
+    if(!dataTODO) {
         dataTODO = [{
             'id': 1,
             'todo': 'Next Lesion ProCode IT School - 2020-04-25 11:00'
