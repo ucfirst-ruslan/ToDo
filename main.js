@@ -1,4 +1,5 @@
 const localKey = '_todo';
+let editItemNow = false;
 let dataTODO = [{
     'id': 1,
     'status': true,
@@ -33,10 +34,10 @@ ul.addEventListener('click', (event) => {
             saveEditItem(target);
             break;
         case 'progress':
-            statusItem(target);
+            !editItemNow ? statusItem(target) : '';
             break;
         case 'check':
-            statusItem(target);
+            !editItemNow ? statusItem(target) : '';
             break;
     }
 });
@@ -66,12 +67,14 @@ function saveEditItem(target) {
                 dataTODO[data].todo = editTODO;
             }
         }
-        addStorage(dataTODO)
+        editItemNow = false;
+        addStorage(dataTODO);
     }
 }
 
 //Edit item
 function editItem(target) {
+    editItemNow = true;
     let index = target.parentElement.getAttribute("id-todo"); // индекс
     let textTODO = target.previousSibling.innerHTML; // содержимое ячейки
 
