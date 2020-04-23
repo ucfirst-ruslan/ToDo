@@ -9,18 +9,26 @@ body {
   background-size: cover;
   color: #333; }
 
-container {
-  margin: 3rem auto;
-  min-width: 380px;
-  max-width: 50%;
-  min-height: 480px;
-  max-height: 100%;
-  background: rgba(250, 250, 250, 0.7);
+wrapper {
+  top: 0;
+  left: 0;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: stretch;
   align-items: center;
-  justify-content: flex-end;
-  border-radius: 3px;
+  width: 100%;
+  height: 100%;
+  position: fixed; }
+
+container {
+  margin: 50px auto;
+  min-width: 380px;
+  width: 500px;
+  max-height: 100%;
+  background: rgba(250, 250, 250, 0.9);
+  border-radius: 5px;
   box-shadow: 0 0 5px rgba(25, 25, 25, 0.25);
   padding: 1rem; }
 
@@ -40,34 +48,71 @@ h1 {
   overflow-x: hidden; }
 
 ul {
-  padding-right: 10px; }
+  padding: 0 10px; }
   ul li {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-content: center;
+    align-items: stretch;
     border-bottom: #d2d2d2 solid 1px;
-    padding: 13px 5px;
+    padding: 13px 0px;
     list-style: none;
     cursor: pointer;
     transition: all 0.25s cubic-bezier(0.2, 0, 0.03, 1); }
-    ul li:hover {
-      opacity: 1; }
-    ul li:hover::before {
-      position: absolute;
-      content: "X";
-      color: #bb0000;
-      font-size: 38px;
-      margin-left: -40px;
-      padding-right: 20px;
-      animation: delete 1s linear infinite; }
+    ul li span {
+      display: inline-block; }
+      ul li span.progress, ul li span.check {
+        order: 0;
+        flex: 0 1 auto;
+        align-self: auto;
+        height: 20px;
+        width: 40px; }
+      ul li span.progress {
+        background: url("assets/progress.svg") no-repeat top left; }
+      ul li span.check {
+        background: url("assets/check.svg") no-repeat top left; }
+    ul li span.text {
+      order: 0;
+      flex: 1 1;
+      align-self: auto; }
+      ul li span.text.completed {
+        color: #c4c4c4; }
+      ul li span.text input.edit-todo {
+        background-color: #fff;
+        display: block;
+        width: 100%;
+        padding: 8px;
+        margin: -8px;
+        /* height: 18px; */
+        font-size: 16px;
+        /* margin-bottom: 10px; */
+        border-radius: 3px;
+        border-style: none;
+        outline: none; }
+    ul li span.remove, ul li span.edit, ul li span.save-edit {
+      order: 0;
+      flex: 0 1 auto;
+      align-self: auto;
+      margin-left: 20px;
+      height: 20px;
+      width: 20px; }
+    ul li span.remove {
+      background: url("assets/delete.svg") no-repeat top left; }
+    ul li span.edit {
+      background: url("assets/edit.svg") no-repeat top left; }
+      ul li span.edit.hide-icon {
+        display: none; }
+    ul li span.save-edit {
+      background: url("assets/save.svg") no-repeat top left; }
 
-@keyframes delete {
-  50% {
-    content: "X";
-    color: white; } }
 .add-todo {
   width: 100%;
   text-align: center;
-  margin-top: 2rem; }
+  margin-top: 1rem; }
   .add-todo input {
-    background-color: rgba(250, 250, 250, 0.7);
+    background-color: rgba(250, 250, 250, 0.9);
     display: block;
     width: 100%;
     height: 40px;
@@ -75,16 +120,22 @@ ul {
     margin-bottom: 10px;
     border-radius: 3px;
     border-style: none;
-    padding: 0 10px; }
+    padding: 0 10px;
+    outline: none; }
     .add-todo input:focus {
       background-color: rgba(250, 250, 250, 0.8); }
   .add-todo .btn {
     width: 160px;
     padding: 8px 15px;
-    font-size: 14px;
+    font-size: 15px;
     border-radius: 3px;
-    border-style: none;
-    background-color: rgba(250, 250, 250, 0.7);
-    cursor: pointer; }
+    border: #7c7c7c solid 1px;
+    background-color: transparent;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.25s cubic-bezier(0.2, 0, 0.03, 1); }
+    .add-todo .btn:hover {
+      background-color: rgba(250, 250, 250, 0.9);
+      box-sizing: border-box; }
 
 /*# sourceMappingURL=styles.css.map */
