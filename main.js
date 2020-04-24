@@ -14,7 +14,7 @@ function loadPage() {
         dataTODO = dataStor;
     }
     addStorage(dataTODO);
-    createItem(dataTODO);
+    createItems(dataTODO);
 }
 
 
@@ -156,14 +156,19 @@ function addItem() {
         dataTODO.push(data);
 
         addStorage(dataTODO);
-        createItem([data]);
+        createItems([data]);
 
         input.value = '';
     }
 }
 
 //Create item in to-do list
-function createItem(data) {
+function createItems(data) {
+    // Sort by "status"
+    data.sort(function(obj1, obj2) {
+        return obj2.status - obj1.status;
+    });
+
     for (let item of data) {
         let ul = document.getElementById('list');
         let li = document.createElement("li");
@@ -177,6 +182,7 @@ function createItem(data) {
             li.innerHTML += `<span class="text completed">${item.todo}</span>`;
             li.innerHTML += '<span class="edit hide-icon"></span><span class="remove"></span>';
         }
+        li.setAttribute("draggable", "true");
         li.setAttribute("id-todo", item.id);
         ul.appendChild(li);
     }
@@ -196,3 +202,4 @@ function getStorage() {
 }
 
 loadPage();
+
