@@ -38,7 +38,8 @@ container {
   min-width: 380px;
   width: 500px;
   //min-height: 480px;
-  max-height: 100%;
+  //max-height: 100%;
+  height: 500px;
   background: $tr-color;
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(25, 25, 25, 0.25);
@@ -60,6 +61,7 @@ h1 {
 .list-container {
   font-size: 100%;
   width: 100%;
+  height: 68%;
   max-height: 450px;
   overflow-x: hidden;
 }
