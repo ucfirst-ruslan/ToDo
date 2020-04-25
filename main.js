@@ -20,9 +20,8 @@ function loadPage() {
 
     if (dataStor) {
         dataTODO = dataStor;
-    } else {
-        setStorage(dataTODO);
     }
+    setStorage(dataTODO);
     createItems(dataTODO);
 }
 
@@ -54,7 +53,7 @@ ul.addEventListener('click', (event) => {
 ul.addEventListener('dblclick', (event) => {
     let target = event.target;
 
-    if (target.className === 'text') {
+    if (target.className == 'text') {
         editItem(target.nextSibling);
     }
 });
@@ -71,7 +70,7 @@ function saveEditItem(target) {
 
         let index = target.parentElement.getAttribute("id-todo");
         for (let data in dataTODO) {
-
+            //Use only '=='
             if (dataTODO[data].id == index) {
                 dataTODO[data].todo = editTODO;
             }
@@ -97,8 +96,8 @@ function deleteItem(target) {
     let index = target.parentElement.getAttribute("id-todo");
 
     for (let item in dataTODO) {
-
-        if (dataTODO[item].id === index) {
+        // Use only '=='
+        if (dataTODO[item].id == index) {
             dataTODO.splice(item, 1);
         }
     }
@@ -136,8 +135,8 @@ function statusItemToStorage(target, status) {
     let index = target.parentElement.getAttribute("id-todo");
 
     for (let item in dataTODO) {
-
-        if (dataTODO[item].id === index) {
+        //Use only '=='
+        if (dataTODO[item].id == index) {
             dataTODO[item].status = status;
         }
     }
@@ -153,7 +152,7 @@ btn.addEventListener('click',  addItem);
 let input = document.querySelector('input');
 input.addEventListener('keypress', (keyPressed) => {
 
-    if(keyPressed.key === 'Enter') {
+    if(keyPressed.key == 'Enter') {
         addItem();
     }
 });
@@ -268,10 +267,10 @@ document.addEventListener('drop', (event) => {
 
 function getLi( target ) {
 
-    while ( target.nodeName.toLowerCase() !== 'li' && target.nodeName.toLowerCase() !== 'body' ) {
+    while ( target.nodeName.toLowerCase() != 'li' && target.nodeName.toLowerCase() != 'body' ) {
         target = target.parentNode;
     }
-    if ( target.nodeName.toLowerCase() === 'body' ) {
+    if ( target.nodeName.toLowerCase() == 'body' ) {
         return false;
     } else {
         return target;
@@ -287,7 +286,7 @@ function addItemForDrag() {
         let textTODO = item.firstChild.nextSibling.innerHTML;
 
         let status;
-        status = (item.firstChild.classList.value === 'progress') ? true : false;
+        status = (item.firstChild.classList.value == 'progress') ? true : false;
 
         items.push({'id': index, 'status': status, 'todo': textTODO});
     }
