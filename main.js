@@ -10,7 +10,7 @@ let dataTODO = [
     {
         'id': 2,
         'status': true,
-        'todo': 'Next Lesion ProCode IT School - 2020-05-02 11:00'
+        'todo': 'Next Lesion ProCode IT School - 2020-05-03 11:00'
     }
 ];
 
