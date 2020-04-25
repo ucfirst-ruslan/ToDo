@@ -13,7 +13,7 @@ function loadPage() {
     if(dataStor) {
         dataTODO = dataStor;
     }
-    addStorage(dataTODO);
+    setStorage(dataTODO);
     createItems(dataTODO);
 }
 
@@ -68,7 +68,7 @@ function saveEditItem(target) {
             }
         }
         editItemNow = false;
-        addStorage(dataTODO);
+        setStorage(dataTODO);
     }
 }
 
@@ -93,9 +93,10 @@ function deleteItem(target) {
             dataTODO.splice(data, 1);
         }
     }
-
-    target.parentElement.remove();
-    addStorage(dataTODO);
+    target.parentElement.classList.remove('fadeIn');
+    target.parentElement.classList.add('fadeOut');
+    setTimeout(() => {target.parentElement.remove()}, 400);
+    setStorage(dataTODO);
 }
 
 // Functions switch status
@@ -128,7 +129,7 @@ function statusItemToStorage(target, status) {
         }
     }
     //console.log(dataTODO);
-    addStorage(dataTODO);
+    setStorage(dataTODO);
 }
 
 // Listeners. Add new item
@@ -155,7 +156,7 @@ function addItem() {
 
         dataTODO.push(data);
 
-        addStorage(dataTODO);
+        setStorage(dataTODO);
         createItems([data]);
 
         input.value = '';
@@ -164,10 +165,10 @@ function addItem() {
 
 //Create item in to-do list
 function createItems(data) {
-    // Sort by "status"
-    data.sort(function(obj1, obj2) {
-        return obj2.status - obj1.status;
-    });
+    // // Sort by "status"
+    // data.sort(function(obj1, obj2) {
+    //     return obj2.status - obj1.status;
+    // });
 
     for (let item of data) {
         let ul = document.getElementById('list');
@@ -182,6 +183,7 @@ function createItems(data) {
             li.innerHTML += `<span class="text completed">${item.todo}</span>`;
             li.innerHTML += '<span class="edit hide-icon"></span><span class="remove"></span>';
         }
+        li.classList.add('animated', 'fadeIn', 'delay-0.4s')
         li.setAttribute("draggable", "true");
         li.setAttribute("id-todo", item.id);
         ul.appendChild(li);
@@ -189,7 +191,7 @@ function createItems(data) {
 }
 
 // Add array in storage
-function addStorage(data){
+function setStorage(data){
     let value = JSON.stringify(data);
 
     localStorage.removeItem(localKey);
@@ -203,3 +205,87 @@ function getStorage() {
 
 loadPage();
 
+
+// Drag'n'Drop
+let dragging = null;
+
+document.addEventListener('dragstart', (event) => {
+
+    let target = getLi( event.target );
+    dragging = target;
+    dragging.style['filter'] = 'blur(4px)';
+    dragging.style['opacity'] = '.6';
+    event.dataTransfer.setData('text/plain', null);
+});
+
+document.addEventListener('dragover', (event) => {
+    event.preventDefault();
+
+    let target = getLi( event.target );
+    let bounding = target.getBoundingClientRect()
+    let offset = bounding.y + (bounding.height/2);
+
+    if (event.clientY - offset > 0) {
+        target.style['border-bottom'] = 'solid 2px red';
+        target.style['border-top'] = '';
+    } else if (event.clientY - offset < 0){
+        target.style['border-top'] = 'solid 2px red';
+        target.style['border-bottom'] = '';
+    }
+});
+
+document.addEventListener('dragleave', (event) => {
+    let target = getLi( event.target );
+    target.style['border-bottom'] = '';
+    target.style['border-top'] = '';
+});
+
+document.addEventListener('drop', (event) => {
+    event.preventDefault();
+
+    let target = getLi( event.target );
+    dragging.style['filter'] = '';
+    dragging.style['opacity'] = '';
+
+    if (target.style['border-bottom'] !== '') {
+        target.style['border-bottom'] = '';
+        target.parentNode.insertBefore(dragging, event.target.nextSibling);
+    } else {
+        target.style['border-top'] = '';
+        target.parentNode.insertBefore(dragging, event.target);
+    }
+    addItemForDrag();
+});
+
+function getLi( target ) {
+
+    while ( target.nodeName.toLowerCase() !== 'li' && target.nodeName.toLowerCase() !== 'body' ) {
+        target = target.parentNode;
+    }
+    if ( target.nodeName.toLowerCase() === 'body' ) {
+        return false;
+    } else {
+        return target;
+    }
+}
+
+function addItemForDrag() {
+    let items = [];
+    for (let item of ul.childNodes) {
+
+        let index = item.getAttribute("id-todo");
+        let textTODO = item.firstChild.nextSibling.innerHTML;
+
+        let status;
+        if (item.firstChild.classList.value === 'progress') {
+            status = true;
+        } else {
+            status = false;
+        }
+
+        items.push({'id': index, 'status': status, 'todo': textTODO});
+    }
+
+    dataTODO = items;
+    setStorage(dataTODO);
+}
