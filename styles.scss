@@ -92,12 +92,15 @@ ul {
         align-self: auto;
         height: 20px;
         width: 40px;
+        transition: all 0.25s cubic-bezier(0.2, 0, 0.03, 1);
       }
       &.progress {
+        transition: all 0.25s cubic-bezier(0.2, 0, 0.03, 1);
         //margin-right: 20px;
         background:url("assets/progress.svg") no-repeat top left;
       }
       &.check {
+        transition: all 0.25s cubic-bezier(0.2, 0, 0.03, 1);
         //margin-right: 20px;
         background:url("assets/check.svg") no-repeat top left;
       }
@@ -108,6 +111,7 @@ ul {
       flex: 1 1;
       align-self: auto;
       //max-width: 320px;
+      transition: all 0.25s cubic-bezier(0.2, 0, 0.03, 1);
       &.completed {
         color: #c4c4c4;
       }
@@ -123,6 +127,7 @@ ul {
         border-radius: 3px;
         border-style: none;
         outline: none;
+        transition: all 0.25s cubic-bezier(0.2, 0, 0.03, 1);
       }
 
     }
@@ -135,6 +140,7 @@ ul {
       margin-left: 20px;
       height: 20px;
       width: 20px;
+      transition: all 0.25s cubic-bezier(0.2, 0, 0.03, 1);
     }
     span.remove {
       background:url("assets/delete.svg") no-repeat top left;

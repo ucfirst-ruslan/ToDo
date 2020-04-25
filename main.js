@@ -112,7 +112,7 @@ function statusItem(target) {
     } else {
         target.classList.remove("check");
         target.classList.add("progress");
-        target.nextSibling.classList.remove("completed");
+        target.nextSibling.classList.remove('completed');
         target.nextSibling.nextSibling.classList.remove("hide-icon");
         status = true;
     }
@@ -183,7 +183,7 @@ function createItems(data) {
             li.innerHTML += `<span class="text completed">${item.todo}</span>`;
             li.innerHTML += '<span class="edit hide-icon"></span><span class="remove"></span>';
         }
-        li.classList.add('animated', 'fadeIn', 'delay-0.4s')
+        li.classList.add('animated', 'fadeIn', 'faster')
         li.setAttribute("draggable", "true");
         li.setAttribute("id-todo", item.id);
         ul.appendChild(li);
@@ -214,7 +214,7 @@ document.addEventListener('dragstart', (event) => {
     let target = getLi( event.target );
     dragging = target;
     dragging.style['filter'] = 'blur(4px)';
-    dragging.style['opacity'] = '.6';
+    dragging.style['opacity'] = '0.6';
     event.dataTransfer.setData('text/plain', null);
 });
 

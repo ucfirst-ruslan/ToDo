@@ -69,15 +69,19 @@ ul {
         flex: 0 1 auto;
         align-self: auto;
         height: 20px;
-        width: 40px; }
+        width: 40px;
+        transition: all 0.25s cubic-bezier(0.2, 0, 0.03, 1); }
       ul li span.progress {
+        transition: all 0.25s cubic-bezier(0.2, 0, 0.03, 1);
         background: url("assets/progress.svg") no-repeat top left; }
       ul li span.check {
+        transition: all 0.25s cubic-bezier(0.2, 0, 0.03, 1);
         background: url("assets/check.svg") no-repeat top left; }
     ul li span.text {
       order: 0;
       flex: 1 1;
-      align-self: auto; }
+      align-self: auto;
+      transition: all 0.25s cubic-bezier(0.2, 0, 0.03, 1); }
       ul li span.text.completed {
         color: #c4c4c4; }
       ul li span.text input.edit-todo {
@@ -91,14 +95,16 @@ ul {
         /* margin-bottom: 10px; */
         border-radius: 3px;
         border-style: none;
-        outline: none; }
+        outline: none;
+        transition: all 0.25s cubic-bezier(0.2, 0, 0.03, 1); }
     ul li span.remove, ul li span.edit, ul li span.save-edit {
       order: 0;
       flex: 0 1 auto;
       align-self: auto;
       margin-left: 20px;
       height: 20px;
-      width: 20px; }
+      width: 20px;
+      transition: all 0.25s cubic-bezier(0.2, 0, 0.03, 1); }
     ul li span.remove {
       background: url("assets/delete.svg") no-repeat top left; }
     ul li span.edit {
