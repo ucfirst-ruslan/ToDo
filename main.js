@@ -1,5 +1,6 @@
 const localKey = '_todo';
 let editItemNow = false;
+let ul = document.querySelector("#list");
 let dataTODO = [
     {
         'id': 1,
@@ -27,7 +28,7 @@ function loadPage() {
 
 
 //Listeners
-let ul = document.querySelector("#list");
+// let ul = document.querySelector("#list");
 ul.addEventListener('click', (event) => {
     let target = event.target;
 
@@ -95,10 +96,10 @@ function editItem(target) {
 function deleteItem(target) {
     let index = target.parentElement.getAttribute("id-todo");
 
-    for (let data in dataTODO) {
+    for (let item in dataTODO) {
 
-        if (dataTODO[data].id == index) {
-            dataTODO.splice(data, 1);
+        if (dataTODO[item].id === index) {
+            dataTODO.splice(item, 1);
         }
     }
 
@@ -107,6 +108,7 @@ function deleteItem(target) {
     setTimeout(() => {
         target.parentElement.remove();
     }, 400);
+
     setStorage(dataTODO);
 }
 
@@ -133,13 +135,12 @@ function statusItem(target) {
 function statusItemToStorage(target, status) {
     let index = target.parentElement.getAttribute("id-todo");
 
-    for (let data in dataTODO) {
+    for (let item in dataTODO) {
 
-        if (dataTODO[data].id == index) {
-            dataTODO[data].status = status;
+        if (dataTODO[item].id === index) {
+            dataTODO[item].status = status;
         }
     }
-    //console.log(dataTODO);
     setStorage(dataTODO);
 }
 
@@ -182,7 +183,6 @@ function createItems(data) {
     // });
 
     for (let item of data) {
-        let ul = document.getElementById('list');
         let li = document.createElement('li');
 
         if (item.status) {
@@ -214,9 +214,7 @@ function getStorage() {
     return localStorage.getItem(localKey);
 }
 
-loadPage();
-
-
+/////////////////////////////////////////
 // Drag'n'Drop
 let dragging = null;
 
@@ -282,6 +280,7 @@ function getLi( target ) {
 
 function addItemForDrag() {
     let items = [];
+
     for (let item of ul.childNodes) {
 
         let index = item.getAttribute("id-todo");
@@ -296,3 +295,5 @@ function addItemForDrag() {
     dataTODO = items;
     setStorage(dataTODO);
 }
+
+loadPage();
