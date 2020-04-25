@@ -1,19 +1,27 @@
 const localKey = '_todo';
 let editItemNow = false;
-let dataTODO = [{
-    'id': 1,
-    'status': true,
-    'todo': 'Next Lesion ProCode IT School - 2020-04-25 11:00'
-}];
+let dataTODO = [
+    {
+        'id': 1,
+        'status': false,
+        'todo': 'Next Lesion ProCode IT School - 2020-04-25 11:00'
+    },
+    {
+        'id': 2,
+        'status': true,
+        'todo': 'Next Lesion ProCode IT School - 2020-05-02 11:00'
+    }
+];
 
 //Primary load|reload page
 function loadPage() {
     let dataStor = JSON.parse(getStorage());
 
-    if(dataStor) {
+    if (dataStor) {
         dataTODO = dataStor;
+    } else {
+        setStorage(dataTODO);
     }
-    setStorage(dataTODO);
     createItems(dataTODO);
 }
 
@@ -23,7 +31,7 @@ let ul = document.querySelector("#list");
 ul.addEventListener('click', (event) => {
     let target = event.target;
 
-    switch(target.className) {
+    switch (target.className) {
         case 'remove':
             deleteItem (target);
             break;
@@ -93,9 +101,12 @@ function deleteItem(target) {
             dataTODO.splice(data, 1);
         }
     }
+
     target.parentElement.classList.remove('fadeIn');
     target.parentElement.classList.add('fadeOut');
-    setTimeout(() => {target.parentElement.remove()}, 400);
+    setTimeout(() => {
+        target.parentElement.remove();
+    }, 400);
     setStorage(dataTODO);
 }
 
@@ -118,7 +129,7 @@ function statusItem(target) {
     }
     statusItemToStorage(target, status);
 }
-//
+// Write status
 function statusItemToStorage(target, status) {
     let index = target.parentElement.getAttribute("id-todo");
 
@@ -172,7 +183,7 @@ function createItems(data) {
 
     for (let item of data) {
         let ul = document.getElementById('list');
-        let li = document.createElement("li");
+        let li = document.createElement('li');
 
         if (item.status) {
             li.innerHTML = '<span class="progress"></span>';
@@ -277,11 +288,7 @@ function addItemForDrag() {
         let textTODO = item.firstChild.nextSibling.innerHTML;
 
         let status;
-        if (item.firstChild.classList.value === 'progress') {
-            status = true;
-        } else {
-            status = false;
-        }
+        status = (item.firstChild.classList.value === 'progress') ? true : false;
 
         items.push({'id': index, 'status': status, 'todo': textTODO});
     }
