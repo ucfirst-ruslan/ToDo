@@ -1,18 +1,7 @@
 const localKey = '_todo';
 let editItemNow = false;
 let ul = document.querySelector("#list");
-let dataTODO = [
-    {
-        'id': 1,
-        'status': false,
-        'todo': 'Next Lesion ProCode IT School - 2020-04-25 11:00'
-    },
-    {
-        'id': 2,
-        'status': true,
-        'todo': 'Next Lesion ProCode IT School - 2020-05-03 11:00'
-    }
-];
+let dataTODO = [];
 
 //Primary load|reload page
 function loadPage() {
